@@ -3,11 +3,11 @@
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
 
-export async function verifyPassword(data: FormData) {
+export async function verifyPassword(state: any, data: FormData) {
   const password = data.get("password");
 
   if (password !== "admin") {
-    return false;
+    return { error: "Invalid password, please try again." };
   }
   cookies().set("admin", "true");
   redirect("/admin", RedirectType.replace);
